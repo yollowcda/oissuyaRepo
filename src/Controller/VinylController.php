@@ -2,19 +2,34 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class VinylController{
+class VinylController extends AbstractController{
 
     #[Route('/', name: 'homepage')]
     public function homepage(): Response
     {
-        //$variable = "oissuya print test";
-        //dd($variable);
-        return new Response('PHP EIYUU');
+        return($this->render('/vinyl/homepage.html.twig',[
+            'title'  => 'Crazy frog',
+            'tab' => $this->getSongsTitles()
+        ]));
     }
+    private function getSongsTitles() : array {
+        $tableau =[
+        ['song' => 'Gangsta\'s Paradise', 'artist' => 'Coolio'], 
+        ['song' => 'Waterfalls', 'artist' => 'TLC'], 
+        ['song' => 'Creep', 'artist' => 'Radiohead'], 
+        ['song' => 'Kiss from a Rose', 'artist' => 'Seal'], 
+        ['song' => 'On Bended Knee', 'artist' => 'Boyz II Men'], 
+        ['song' => 'Fantasy', 'artist' => 'Mariah Carey'],
+        ];
+        return $tableau;
+    }
+
+
 
 
     #[Route('/browse', name: 'browse')]

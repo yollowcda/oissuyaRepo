@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ parent() }}
+    Créer un nouvel album
+{% endblock %}
+
+{% block body %}
+    <div>
+        Tracks:
+        <ul>
+        {% for key, t in tab %}
+            <li>
+                {{'Chanson n°: ' ~ key }}: {{ t.artist ~ ' chanté par ' ~ t.song}}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
