@@ -6,16 +6,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Symfony\Component\String\u;
+use Twig\Environment;
 
 class VinylController extends AbstractController{
 
-    #[Route('/', name: 'homepage')]
-    public function homepage(): Response
+    #[Route('/', name: 'app_homepage')]
+    public function homepage(Environment $env): Response
     {
-        return($this->render('/vinyl/homepage.html.twig',[
-            'title'  => 'Crazy frog',
-            'tab' => $this->getSongsTitles()
-        ]));
+        
+        $html = $env->render('/vinyl/homepage.html.twig',[
+        'title'  => 'Crazy frog',
+        'tab' => $this->getSongsTitles()
+        ]);
+    
+        
+        return new Response($html);
     }
     private function getSongsTitles() : array {
         $tableau =[
@@ -41,9 +47,10 @@ class VinylController extends AbstractController{
     }
 
 
-    #[Route('/browse/{slug}', name: 'randomGenre')]
-    public function randomGenre(string $slug): Response
+    #[Route('/browse/{slug}', name: 'app_randomGenre')]
+    public function randomGenre(string $slug= null): Response
     {
-        return new Response($slug);
+        $genre = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null; 
+        return $this->render('vinyl/browse.html.twig', ['genre' => $genre]); 
     }
 }
