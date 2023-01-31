@@ -17,7 +17,7 @@ class VinylController extends AbstractController{
         
         $html = $env->render('/vinyl/homepage.html.twig',[
         'title'  => 'Crazy frog',
-        'tab' => $this->getSongsTitles()
+        'tab' => $this->getSongsTitles(),
         ]);
     
         
@@ -34,6 +34,29 @@ class VinylController extends AbstractController{
         ];
         return $tableau;
     }
+    private function getMixes(): array 
+    { 
+        return [
+            [
+                'title' => 'PB & Jams', 
+                'trackCount' => 14, 
+                'genre' => 'Rock', 
+                'createdAt' => new \DateTime('2021-10-02'), 
+            ], 
+            [
+                'title' => 'Put a Hex on your Ex', 
+                'trackCount' => 8, 
+                'genre' => 'Heavy Metal', 
+                'createdAt' => new \DateTime('2022-04-28'), 
+            ], 
+            [
+                'title' => 'Spice Grills - Summer Tunes', 
+                'trackCount' => 10, 
+                'genre' => 'Pop', 
+                'createdAt' => new \DateTime('2019-06-20'), 
+            ], 
+        ]; 
+    } 
 
 
 
@@ -51,6 +74,11 @@ class VinylController extends AbstractController{
     public function randomGenre(string $slug= null): Response
     {
         $genre = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null; 
-        return $this->render('vinyl/browse.html.twig', ['genre' => $genre]); 
+        return $this->render('vinyl/browse.html.twig',
+        [
+            'genre' => $genre,
+            'mix' => $this->getMixes(),
+        ]
+    ); 
     }
 }
