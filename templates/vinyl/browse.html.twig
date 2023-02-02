@@ -26,7 +26,7 @@
                     <div class="mixed-vinyl-container p-3 text-center">
                         <img src="https://via.placeholder.com/300" data-src="https://via.placeholder.com/300" alt="Square placeholder img">
                         <p class="mt-2"><strong>{{ element.title }}</strong></p>
-                        <span>{{ element.trackCount }}</span> | <span>{{ element.genre }}</span> | <span>{{ element.createdAt|date("d/m/Y")  }}</span>
+                        <span>{{ element.trackCount }}</span> | <span>{{ element.genre }}</span> | <span> {{ element.createdAt|ago }} </span>
                     </div>
                 </div>
             {% endfor %}
