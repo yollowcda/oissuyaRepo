@@ -39,28 +39,43 @@ class VinylMixRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return VinylMix[] Returns an array of VinylMix objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('v')
-//            ->andWhere('v.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('v.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return VinylMix[]
+     */
+    public function filterByGenre($genre): array
+    {
+        $qb =  $this->createQueryBuilder('v');
+            //->andWhere('v.genre = :val')
+            $qb->orderBy('v.vote', 'DESC');
+            $qb->setMaxResults(10);
+        if ($genre) {
+            $qb->andWhere('v.genre = :val')
+                ->setParameter('val', $genre);
+        }
+        return $qb->getQuery()->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?VinylMix
-//    {
-//        return $this->createQueryBuilder('v')
-//            ->andWhere('v.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    /**
+    //     * @return VinylMix[] Returns an array of VinylMix objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('v')
+    //           
+    //            ->orderBy('v.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ; 
+    //    }
+
+    //    public function findOneBySomeField($value): ?VinylMix
+    //    {
+    //        return $this->createQueryBuilder('v')
+    //            ->andWhere('v.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

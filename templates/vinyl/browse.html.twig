@@ -7,26 +7,26 @@
     <h2 class="mt-5 mb-4">Filter by Genre</h2>
     <ul class="genre-list ps-0 mt-2 mb-3">
         <li class="d-inline">
-            <a class="btn btn-primary btn-sm" href={{ path('app_randomGenre', { slug: 'Pop' }) }}>Pop</a>
+           
+            <a class="btn btn-primary btn-sm" href={{ path('app_randomGenre', { slug: 'Pop' }) }}>pop</a>
         </li>
         <li class="d-inline">
-            <a class="btn btn-primary btn-sm" href={{ path('app_randomGenre', { slug: 'Rock' }) }}>Rock</a>
+            <a class="btn btn-primary btn-sm" href={{ path('app_randomGenre', { slug: 'Rock' }) }}>rock</a>
         </li>
         <li class="d-inline">
-            <a class="btn btn-primary btn-sm" href={{ path('app_randomGenre', { slug: 'Heavy_Metal' }) }}>Heavy Metal</a>
+            <a class="btn btn-primary btn-sm" href={{ path('app_randomGenre', { slug: 'Heavy_Metal' }) }}>heavy Metal</a>
         </li>
     </ul>
 
     <div>
         <h2 class="mt-5">Mixes</h2>
         <div class="row">
-            {# {{ dump(mix) }} #}
             {% for element in mix %}
                 <div class="col col-md-4">
                     <div class="mixed-vinyl-container p-3 text-center">
-                        <img src="https://via.placeholder.com/300" data-src="https://via.placeholder.com/300" alt="Square placeholder img">
+                        <img src={{ element.getImageUrl(300) }} data-src="https://via.placeholder.com/300" alt="Square placeholder img">
                         <p class="mt-2"><strong>{{ element.title }}</strong></p>
-                        <span>{{ element.trackCount }}</span> | <span>{{ element.genre }}</span> | <span> {{ element.createdAt|ago }} </span>
+                        <span>{{ element.trackCount }}</span> | <span>{{ element.genre }}</span> | <span> {{ element.createdAt|ago }}</br> {{ element.getVotesString() }} </span>
                     </div>
                 </div>
             {% endfor %}
