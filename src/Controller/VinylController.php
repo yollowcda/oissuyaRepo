@@ -40,23 +40,5 @@ class VinylController extends AbstractController
         ];
         return $tableau;
     }
-
-
-    #[Route('/browse/{slug}', name: 'app_randomGenre')]
-    public function randomGenre(EntityManagerInterface $em, string $slug = null): Response
-    {
-        /** @var VinylMixRepository */
-        $repository = $em->getRepository(VinylMix::class);
-        //dd($slug);
-        $a = $repository->filterByGenre($slug);
-        $genre = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
-
-        return $this->render(
-            'vinyl/browse.html.twig',
-            [
-                'genre' => $genre,
-                'mix' => $a,
-            ]
-        );
-    }
+    
 }

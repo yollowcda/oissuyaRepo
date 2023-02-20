@@ -16,6 +16,9 @@
         <li class="d-inline">
             <a class="btn btn-primary btn-sm" href={{ path('app_randomGenre', { slug: 'Heavy_Metal' }) }}>heavy Metal</a>
         </li>
+        <li class="d-inline">
+            <a class="btn btn-primary btn-sm" href={{ path('app_randomGenre', { slug: 'Zouk' }) }}>Zouk</a>
+        </li>
     </ul>
 
     <div>
@@ -24,9 +27,11 @@
             {% for element in mix %}
                 <div class="col col-md-4">
                     <div class="mixed-vinyl-container p-3 text-center">
-                        <img src={{ element.getImageUrl(300) }} data-src="https://via.placeholder.com/300" alt="Square placeholder img">
-                        <p class="mt-2"><strong>{{ element.title }}</strong></p>
-                        <span>{{ element.trackCount }}</span> | <span>{{ element.genre }}</span> | <span> {{ element.createdAt|ago }}</br> {{ element.getVotesString() }} </span>
+                            <a href={{ path('mix', { id: element.id}) }}>
+                                <img src={{ element.getImageUrl(200) }} data-src="https://via.placeholder.com/200" alt="Square placeholder img">
+                            </a>
+                            <p class="mt-2"><strong>{{ element.title }}</strong></p>
+                            <span>{{ element.trackCount }}</span> | <span>{{ element.genre }}</span> | <span> {{ element.createdAt|ago }} {{ element.getVotesString() }} </span>
                     </div>
                 </div>
             {% endfor %}
