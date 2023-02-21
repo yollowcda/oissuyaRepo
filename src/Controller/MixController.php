@@ -71,7 +71,7 @@ class MixController extends AbstractController
         }
         
         $em->flush();
-        //dd($mix);
-        return $this->render('/mix/show.html.twig', ['mix' => $mix]);
+        $this->addFlash('success', "Votre vote a bien été enregistré");
+        return $this->redirectToRoute('mix', ['id' => $mix->getId()]);
     }
 }

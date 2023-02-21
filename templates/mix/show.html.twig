@@ -3,6 +3,13 @@
 {% block title %}{{ mix.title }} Mix{% endblock %}
 
 {% block body %}
+
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">
+    <center> <b><font size="+2">{{ message }}</font></b> </center>
+</div>
+{% endfor %}
+
     <div class="container">
         <h1 class="d-inline me-3">{{ mix.title }}</h1>
         <div class="row mt-5">
@@ -11,6 +18,8 @@
                 {% include "mix/_recordSvg.html.twig" %}
 
             </div>
+
+
             <div class="col-12 col-md-8 ps-5">
                 <h2 class="mb-4">{{ mix.trackCount }} songs <small>(genre: {{ mix.genre }})</small></h2> 
                     <p>{{ mix.description }}</p> 
